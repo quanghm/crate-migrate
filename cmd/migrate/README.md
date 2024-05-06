@@ -4,10 +4,10 @@
 
 ### Download pre-built binary (Windows, MacOS, or Linux)
 
-[Release Downloads](https://github.com/golang-migrate/migrate/releases)
+[Release Downloads](https://github.com/quanghm/crate-migrate/releases)
 
 ```bash
-$ curl -L https://github.com/golang-migrate/migrate/releases/download/$version/migrate.$os-$arch.tar.gz | tar xvz
+$ curl -L https://github.com/quanghm/crate-migrate/releases/download/$version/migrate.$os-$arch.tar.gz | tar xvz
 ```
 
 ### MacOS
@@ -38,22 +38,22 @@ $ apt-get install -y migrate
 #### Versioned
 
 ```bash
-$ go get -u -d github.com/golang-migrate/migrate/cmd/migrate
-$ cd $GOPATH/src/github.com/golang-migrate/migrate/cmd/migrate
+$ go get -u -d github.com/quanghm/crate-migrate/cmd/migrate
+$ cd $GOPATH/src/github.com/quanghm/crate-migrate/cmd/migrate
 $ git checkout $TAG  # e.g. v4.1.0
 $ # Go 1.15 and below
-$ go build -tags 'postgres' -ldflags="-X main.Version=$(git describe --tags)" -o $GOPATH/bin/migrate $GOPATH/src/github.com/golang-migrate/migrate/cmd/migrate
+$ go build -tags 'postgres' -ldflags="-X main.Version=$(git describe --tags)" -o $GOPATH/bin/migrate $GOPATH/src/github.com/quanghm/crate-migrate/cmd/migrate
 $ # Go 1.16+
-$ go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@$TAG
+$ go install -tags 'postgres' github.com/quanghm/crate-migrate/v4/cmd/migrate@$TAG
 ```
 
 #### Unversioned
 
 ```bash
 $ # Go 1.15 and below
-$ go get -tags 'postgres' -u github.com/golang-migrate/migrate/cmd/migrate
+$ go get -tags 'postgres' -u github.com/quanghm/crate-migrate/cmd/migrate
 $ # Go 1.16+
-$ go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+$ go install -tags 'postgres' github.com/quanghm/crate-migrate/v4/cmd/migrate@latest
 ```
 
 #### Notes
@@ -65,8 +65,8 @@ with the appropriate database tag(s) for the databases desired.  The tags
 correspond to the names of the sub-packages underneath the
 [`database`](../../database) package.
 1. Similarly to the database build tags, if you need to support other sources, use the appropriate build tag(s).
-1. Support for build constraints will be removed in the future: https://github.com/golang-migrate/migrate/issues/60
-1. For versions of Go 1.15 and lower, [make sure](https://github.com/golang-migrate/migrate/pull/257#issuecomment-705249902) you're not installing the `migrate` CLI from a module. e.g. there should not be any `go.mod` files in your current directory or any directory from your current directory to the root
+1. Support for build constraints will be removed in the future: https://github.com/quanghm/crate-migrate/issues/60
+1. For versions of Go 1.15 and lower, [make sure](https://github.com/quanghm/crate-migrate/pull/257#issuecomment-705249902) you're not installing the `migrate` CLI from a module. e.g. there should not be any `go.mod` files in your current directory or any directory from your current directory to the root
 
 ## Usage
 

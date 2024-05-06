@@ -11,10 +11,10 @@ import (
 
 	"go.uber.org/atomic"
 
-	"github.com/golang-migrate/migrate/v4"
-	"github.com/golang-migrate/migrate/v4/database"
-	"github.com/golang-migrate/migrate/v4/database/multistmt"
 	"github.com/hashicorp/go-multierror"
+	"github.com/quanghm/crate-migrate/v4"
+	"github.com/quanghm/crate-migrate/v4/database"
+	"github.com/quanghm/crate-migrate/v4/database/multistmt"
 )
 
 var (

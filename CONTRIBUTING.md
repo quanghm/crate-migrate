@@ -3,7 +3,7 @@
   1. Make sure you have a running Docker daemon
      (Install for [MacOS](https://docs.docker.com/docker-for-mac/))
   1. Use a version of Go that supports [modules](https://golang.org/cmd/go/#hdr-Modules__module_versions__and_more) (e.g. Go 1.11+)
-  1. Fork this repo and `git clone` somewhere to `$GOPATH/src/github.com/golang-migrate/migrate`
+  1. Fork this repo and `git clone` somewhere to `$GOPATH/src/github.com/quanghm/crate-migrate`
       * Ensure that [Go modules are enabled](https://golang.org/cmd/go/#hdr-Preliminary_module_support) (e.g. your repo path or the `GO111MODULE` environment variable are set correctly)
   1. Install [golangci-lint](https://github.com/golangci/golangci-lint#install)
   1. Run the linter: `golangci-lint run`

@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/golang-migrate/migrate/v4/source"
+	"github.com/quanghm/crate-migrate/v4/source"
 )
 
 type AssetFunc func(name string) ([]byte, error)
