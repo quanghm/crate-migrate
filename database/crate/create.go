@@ -18,7 +18,7 @@ import (
 
 	"github.com/hashicorp/go-multierror"
 	"github.com/lib/pq"
-	"github.com/quanghm/crate-migrate/v4"
+	migrate "github.com/quanghm/crate-migrate/v4"
 	"github.com/quanghm/crate-migrate/v4/database"
 	"github.com/quanghm/crate-migrate/v4/database/multistmt"
 )
@@ -157,7 +157,13 @@ func (c *Crate) Open(connStr string) (database.Driver, error) {
 		return nil, err
 	}
 
-	db, err := sql.Open("crate", migrate.FilterCustomQuery(purl).String())
+	re := regexp.MustCompile("^(crate(db)?)")
+	connectString := re.ReplaceAllString(migrate.FilterCustomQuery(purl).String(), "postgres")
+
+	db, err := sql.Open("postgres", connectString)
+	if err != nil {
+		return nil, err
+	}
 	migrationsTable := purl.Query().Get("x-migrations-table")
 	migrationsTableQuoted := false
 	if s := purl.Query().Get("x-migrations-table-quoted"); len(s) > 0 {
