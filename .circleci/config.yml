@@ -15,7 +15,7 @@ jobs:
 
     # Leave working directory unspecified and use defaults:
     # https://circleci.com/blog/go-v1.11-modules-and-circleci/
-    # working_directory: /go/src/github.com/golang-migrate/migrate
+    # working_directory: /go/src/github.com/quanghm/crate-migrate
 
     environment:
       GO111MODULE: "on"
