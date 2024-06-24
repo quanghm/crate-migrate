@@ -257,7 +257,7 @@ func (c *Crate) Lock() error {
 			return err
 		}
 
-		query := "SELECT COUNT(1) FROM " + pq.QuoteIdentifier(c.config.MigrationsSchemaName) + "." + pq.QuoteIdentifier(c.config.LockTableName) + " WHERE lock_id = $1"
+		query := "SELECT COUNT(1) FROM " + c.migrationsLockTableWithSchema() + " WHERE lock_id = $1"
 		row := c.conn.QueryRowContext(context.Background(), query, lockID)
 
 		var count int
@@ -269,7 +269,7 @@ func (c *Crate) Lock() error {
 			return database.ErrLocked
 		}
 
-		query = "INSERT INTO " + pq.QuoteIdentifier(c.config.MigrationsSchemaName) + "." + c.config.LockTableName + " (lock_id) VALUES ($1)"
+		query = "INSERT INTO " + c.migrationsLockTableWithSchema() + " (lock_id) VALUES ($1)"
 		if _, err = c.conn.ExecContext(ctx, query, lockID); err != nil {
 			return &database.Error{OrigErr: err, Query: []byte(query)}
 		}
@@ -287,7 +287,7 @@ func (c *Crate) Unlock() error {
 
 		// In the event of an implementation (non-migration) error, it is possible for the lock to not be released.  Until
 		// a better locking mechanism is added, a manual purging of the lock table may be required in such circumstances
-		query := "DELETE FROM " + pq.QuoteIdentifier(c.config.MigrationsSchemaName) + "." + c.config.LockTableName + " WHERE lock_id = $1"
+		query := "DELETE FROM " + c.migrationsLockTableWithSchema() + " WHERE lock_id = $1"
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 		defer cancel()
 		if _, err := c.conn.ExecContext(ctx, query, lockID); err != nil {
@@ -524,4 +524,8 @@ func (c *Crate) ensureLockTable() error {
 
 func (c *Crate) migrationsTableWithSchema() string {
 	return pq.QuoteIdentifier(c.config.MigrationsSchemaName) + "." + pq.QuoteIdentifier(c.config.MigrationsTableName)
+}
+
+func (c *Crate) migrationsLockTableWithSchema() string {
+	return pq.QuoteIdentifier(c.config.MigrationsSchemaName) + "." + pq.QuoteIdentifier(c.config.LockTableName)
 }
